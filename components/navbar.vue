@@ -13,9 +13,9 @@
 <script>
   export default {
     props: {
-      title: "Monkey Money",
-      nextFunction: null,
-      nextLabel: ""
+      title: String,
+      nextFunction: Function,
+      nextLabel: String
     },
     methods: {
       nextCallback() {

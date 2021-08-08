@@ -13,7 +13,7 @@
     layout: "default",
     methods: {
       generateDeposit() {
-        this.$store.commit('deposit', { amount: this.amount })
+        this.$store.commit('deposit', this.amount)
         this.$router.push('deposit/preview')
       }
     },

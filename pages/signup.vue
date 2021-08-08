@@ -15,7 +15,7 @@
         type="password"
         name="password"
         label="Password"
-        placeholder="A great password you can make up"
+        placeholder="A great password"
         :rules="[{ required: true, message: 'Password is required' }]"
       />
       <div style="margin: 16px;">
@@ -33,28 +33,31 @@
 
   export default {
     layout: "auth",
+
     data() {
       return {
-        username: "",
         email: "",
         password: "",
       }
     },
+
     methods: {
-      async onSubmit() {
+      onSubmit() {
         this.$axios.post('/api/signup', {
-          username: this.username,
           email: this.email,
           password: this.password,
         })
         .then((response) => {
-          this.$store.commit('user/login', { token: response.token })
-          this.$router.push('index')
+          this.$store.commit('login', response.data)
         })
         .catch((error) => {
-          Notify({ type: 'danger', message: error.response.data })
+          Notify({ type: 'danger', message: error.response.data, duration: 5000 })
         })
       }
     },
+
+    created() {
+      if(this.$store.state.user) this.$router.push('/')
+    }
   }
 </script>

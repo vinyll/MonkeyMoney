@@ -1,6 +1,14 @@
 <template>
   <div>
+    <navbar title="Welcome back! 👋🏼" />
     <van-form>
+      <van-field
+        v-model="email"
+        type="email"
+        name="Email"
+        label="Email"
+        :rules="[{ required: true, message: 'Email is required' }]"
+      />
       <van-field
         v-model="password"
         type="password"
@@ -19,18 +27,39 @@
 </template>
 
 <script>
+  import { Notify } from 'vant'
+
   export default {
     layout: "auth",
+    computed: {
+      user() {
+        return this.$store.state.user
+      }
+    },
+
     data() {
       return {
         email: "",
         password: "",
       }
     },
+
     methods: {
       onSubmit() {
-        debugger
+        const data = { email: this.email, password: this.password }
+
+        this.$axios.post('/api/login', data)
+        .then((response) => {
+          this.$store.commit('login', response.data)
+        })
+        .catch((error) => {
+          Notify({ type: 'danger', message: error.response.data, duration: 5000 })
+        })
       }
     },
+
+    created() {
+      if(this.user) this.$router.push('/')
+    }
   }
 </script>

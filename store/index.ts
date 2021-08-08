@@ -35,7 +35,7 @@ export const mutations = {
   logout(state: State) {
     localStorage.removeItem('user')
     delete state.user
-    $nuxt.$router.push('/')
+    $nuxt.$router.go('/')
   },
 
   deposit(state:State, amount: Number) {

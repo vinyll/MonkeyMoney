@@ -1,9 +1,9 @@
 <template>
   <van-tabbar v-model="active">
-    <van-tabbar-item icon="home-o">Tab</van-tabbar-item>
-    <van-tabbar-item icon="search">Tab</van-tabbar-item>
-    <van-tabbar-item icon="friends-o">Tab</van-tabbar-item>
-    <van-tabbar-item icon="setting-o">Tab</van-tabbar-item>
+    <van-tabbar-item icon="home-o" to="/">Home</van-tabbar-item>
+    <van-tabbar-item icon="paid" to="/deposit">Send</van-tabbar-item>
+    <van-tabbar-item icon="down" to="/withdraw">Receive</van-tabbar-item>
+    <van-tabbar-item icon="contact" to="/profile">profile</van-tabbar-item>
   </van-tabbar>
 </template>
 

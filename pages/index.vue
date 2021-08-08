@@ -1,31 +1,35 @@
 <template>
-  <div>
-    <NuxtLogo />
+  <div class="container">
+    <van-row>
+      <van-col span="12" offset="6">
+        <img src="~/static/monkeymoney.svg" width="100%" />
+        <van-button round type="primary" block to="/signup" v-show="!this.user">Sign up</van-button>
+        <van-button round block v-show="!this.user" to="/login">Log in</van-button>
+        <van-button round block v-show="this.user" to="/logout">Log out</van-button>
+      </van-col>
+    </van-row>
   </div>
 </template>
 
 <script>
   export default {
+
     computed: {
       user() {
         return this.$store.state.user || {}
       }
     },
-
-    created() {
-      if(!this.user.uid) this.$router.replace('signup')
-    }
   }
 </script>
 
 <style scoped>
-  div {
-    display: flex;
+  .container {
+    text-align: center;
     justify-content: center;
+    padding-top: 1rem;
   }
-  svg {
-    height: 100vh;
-    display: flex;
-    align-content: center;
+
+  .van-button {
+    margin: 1rem 0;
   }
 </style>

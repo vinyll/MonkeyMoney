@@ -22,7 +22,12 @@
         </van-button>
       </div>
     </van-form>
-    <nuxt-link to="signup">I don't have an account yet</nuxt-link>
+
+    <van-row>
+      <van-col span="10" offset="1">
+        <nuxt-link to="signup">I don't have an account yet</nuxt-link>
+      </van-col>
+    </van-row>
   </div>
 </template>
 
@@ -30,7 +35,6 @@
   import { Notify } from 'vant'
 
   export default {
-    layout: "auth",
     computed: {
       user() {
         return this.$store.state.user
@@ -57,9 +61,5 @@
         })
       }
     },
-
-    created() {
-      if(this.user) this.$router.push('/')
-    }
   }
 </script>

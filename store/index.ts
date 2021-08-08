@@ -39,7 +39,6 @@ export const mutations = {
   },
 
   deposit(state:State, amount: Number) {
-    debugger
     state.transactions.push({
       amount: Number(amount)
     })

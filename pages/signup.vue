@@ -1,32 +1,37 @@
 <template>
   <div>
     <navbar title="Create your account" />
-    <van-form>
-      <van-field
-        v-model="email"
-        name="email"
-        label="Email"
-        type="email"
-        placeholder="Your email"
-        :rules="[{ required: true, message: 'Email is required' }]"
-      />
-      <van-field
-        v-model="password"
-        type="password"
-        name="password"
-        label="Password"
-        placeholder="A great password"
-        :rules="[{ required: true, message: 'Password is required' }]"
-      />
-      <div style="margin: 16px;">
-        <van-button round block type="info" @click="onSubmit">
-          Create my account
-        </van-button>
-      </div>
-    </van-form>
+    <van-row>
+      <van-col span="22" offset="1">
+        <content-title>Enter your account details</content-title>
+        <van-form>
+          <van-field
+            v-model="email"
+            name="email"
+            label="Email"
+            type="email"
+            placeholder="Your email"
+            :rules="[{ required: true, message: 'Email is required' }]"
+          />
+          <van-field
+            v-model="password"
+            type="password"
+            name="password"
+            label="Password"
+            placeholder="A great password"
+            :rules="[{ required: true, message: 'Password is required' }]"
+          />
+          <div style="margin: 16px;">
+            <van-button round block type="info" @click="onSubmit">
+              Create my account
+            </van-button>
+          </div>
+        </van-form>
+      </van-col>
+    </van-row>
 
     <van-row>
-      <van-col span="10" offset="1">
+      <van-col span="22" offset="1">
         <nuxt-link to="login">I already have an account</nuxt-link>
       </van-col>
     </van-row>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-row>
-      <van-col offset="1" span="10"><slot></slot></van-col>
+      <van-col offset="1" span="22"><slot></slot></van-col>
     </van-row>
   </div>
 </template>

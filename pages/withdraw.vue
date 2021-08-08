@@ -4,7 +4,7 @@
     <main>
       <content-title>Type the code that displays on the sender's screen</content-title>
       <van-row>
-        <van-col span="10" offset="1">
+        <van-col span="22" offset="1">
           <input class="code" v-model="code" placeholder="a1b2c3d4" autofocus>
         </van-col>
       </van-row>
@@ -16,8 +16,10 @@
 
 <script>
   export default {
-    data: {
-      code: "",
+    data() {
+      return {
+        code: "",
+      }
     },
 
     methods: {

@@ -26,7 +26,7 @@
       generateDeposit() {
         this.transfering = true
         this.$store.commit('deposit', this.amount)
-        this.code = "1a2b3c"
+        this.code = this.transaction.uid
       },
 
       cancel() {
@@ -38,7 +38,16 @@
       return {
         transfering: false,
         amount: null,
-        code: "",
+      }
+    },
+    computed: {
+      transaction() {
+        const transactions = this.$store.state.transactions
+        return transactions.length && transactions.slice(-1)[0]
+      },
+      code() {
+        debugger
+        if(this.transaction) return this.transaction.uid.split('-')[1]
       }
     }
   }

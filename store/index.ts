@@ -38,9 +38,19 @@ export const mutations = {
     $nuxt.$router.go('/')
   },
 
+  transaction_add(state: State, transaction) {
+    state.transactions.push(transaction)
+  },
+
   deposit(state:State, amount: Number) {
-    state.transactions.push({
-      amount: Number(amount)
+    $nuxt.$axios.post('/api/deposit', { amount }, {
+      headers: { 'Auth': state.user.uid }
     })
+      .then((response) => {
+        this.commit('transaction_add', response.data)
+      })
+      .catch((error) => {
+        Notify({ type: 'danger', message: error.response.data, duration: 5000 })
+      })
   }
 }

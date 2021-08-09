@@ -1,16 +1,13 @@
 <template>
   <div>
     <navbar title="Receive credit" />
-    <main>
-      <content-title>Type the code that displays on the sender's screen</content-title>
-      <van-row>
-        <van-col span="22" offset="1">
-          <input class="code" v-model="code" placeholder="a1b2c3d4" autofocus>
-        </van-col>
-      </van-row>
-
-      <van-button type="primary" @click="withdraw" block>Validate</van-button>
-    </main>
+    <block>
+      <p>Are your receiving credit from someone?</p>
+      <p>Read the code from her screen and type it here.</p>
+      <input class="code" v-model="code" placeholder="a1b2" minlength="4" maxlength="4" autofocus required>
+      <space />
+      <van-button type="primary" @click="withdraw" :disabled="!this.code" block round>Validate</van-button>
+    </block>
   </div>
 </template>
 
@@ -32,17 +29,15 @@
 
 <style scoped>
   .code {
-    font-size: 3rem;
+    font-size: 2.2rem;
     color: inherit;
     border: 1px dashed #888;
     text-align: center;
+    display: block;
+    width: 100%;
   }
 
   input::placeholder {
     color: #eee;
-  }
-
-  .van-button {
-    margin-top: 3rem;
   }
 </style>

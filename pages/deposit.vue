@@ -2,19 +2,27 @@
   <div>
     <navbar title="Send credit" />
 
-    <main>
-      <input type="number" min=1 max=1000 v-model="amount" placeholder="60" autofocus required>
-      <van-button type="info" :disabled="amount <= 0" @click="generateDeposit" block plain>Transfer</van-button>
-    </main>
+    <block>
+      <blockquote>
+        <p>Enter an amount to transfer.</p>
+        <p>This amount will be removed from your remaining credit and added to your recipient once withdrawn.</p>
+      </blockquote>
+      <van-cell>
+        <!-- Use the title slot to customize the title -->
+        <template #title>
+          <input type="number" min=1 max=1000 v-model="amount" placeholder="60" autofocus required>
+        </template>
+      </van-cell>
+      <van-button type="primary" :disabled="amount <= 0" round @click="generateDeposit" block>Transfer ></van-button>
+    </block>
 
     <van-popup v-model="transfering" position="bottom" :style="{ height: '268px' }" round>
-      <navbar :title="'Transfer ' + amount + ' credits'" />
-
-      <p class="code">{{code}}</p>
-
-      <small>Giving this code will allow someone to take out this credit from your account.</small>
-
-      <van-button type="info" @click="cancel" block>Cancel</van-button>
+      <navbar :title="'Send ' + amount + ' credits'" />
+      <block>
+        <p class="code">{{code}}</p>
+        <small>Giving this code will allow someone to take out this credit from your account.</small>
+        <van-button type="danger" @click="cancel" block round>Cancel</van-button>
+      </block>
     </van-popup>
   </div>
 </template>
@@ -46,7 +54,6 @@
         return transactions.length && transactions.slice(-1)[0]
       },
       code() {
-        debugger
         if(this.transaction) return this.transaction.uid.split('-')[1]
       }
     }
@@ -54,29 +61,17 @@
 </script>
 
 <style scoped>
-  * {
-    --green: rgb(158, 225, 148);
-  }
   input {
-    font-family: inherit;
-    font-size: 10rem;
+    font-size: 2rem;
     border: 0;
-    text-align: center;
-    background-color: transparent;
+    width: 100%;
   }
   input::placeholder {
     color: #eee;
   }
 
-  div {
-    margin: 0 auto;
-    align-content: space-between;
-    align-items: center;
-    text-align: center;
-  }
-
   .code {
-    font-size: 5rem;
+    font-size: 3rem;
     text-align: center;
     margin: 1rem;
     border: 1px dashed #888;

@@ -4,6 +4,10 @@ MonkeyMoney is a trading value system to promote local stores, individual exchan
 
 You don't sell, you don't get paid. Instead you gain and spend credit exchanging services, food, goods.
 
+The following 3 screenshots show you how to login, how to give credit and how to recieve them.
+
+![MonkeyMoney screenshot](./docs/monkeymoney-screenshot.png)
+
 ## Is MonkeyMoney a local currency?
 
 The idea of the local currencies are close to MonkeyMoney as they both promote local purchases, small business and human exchanges.

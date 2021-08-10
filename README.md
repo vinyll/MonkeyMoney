@@ -1,5 +1,35 @@
 # monkeymoney
 
+MonkeyMoney is a trading value system to promote local stores, individual exchanges, human services, trades…
+
+You don't sell, you don't get paid. Instead you gain and spend credit exchanging services, food, goods.
+
+## Is MonkeyMoney a local currency?
+
+The idea of the local currencies are close to MonkeyMoney as they both promote local purchases, small business and human exchanges.
+
+However MonkeyMoney is not based on any currency.
+
+
+## Is MonkeyMoney a [LETS](https://en.wikipedia.org/wiki/Local_exchange_trading_system)?
+
+[A local exchange trading system](https://en.wikipedia.org/wiki/Local_exchange_trading_system) is also very similar to MonkeyMoney.
+
+However MonkeyMoney is easier to trade for goods and to transfer credits.
+
+It also has no boundaries, can be used by a very small group for a weekend on a trip or widely spread for long term among commercial values.
+
+The name comes from the French expression "[Payer en monnaie de singe](https://fr.wikipedia.org/wiki/Payer_en_monnaie_de_singe)" (to pay with monkey money) meaning to pay with a money that can't be converted to a currency.
+
+## Technical details
+
+This part of the project is [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps), client side and relies on a Restful API.
+
+It's based on [NuxtJS](http://nuxtjs.org/) and connect to the [MonkeyMoney API](https://github.com/vinyll/MonkeyMoney-api).
+
+It's meant to be cross-platform and run directly from a web browser.
+
+
 ## Build Setup
 
 ```bash
@@ -16,54 +46,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
-
-## Special Directories
-
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
-
-### `assets`
-
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
-
-### `components`
-
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
-
-### `layouts`
-
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
-
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).

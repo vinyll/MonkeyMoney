@@ -2,12 +2,16 @@
   <div>
     <navbar title="Receive credit" />
     <block>
-      <p>Are your receiving credit from someone?</p>
-      <p>Read the code from her screen and type it here.</p>
+      <p>Do you have a code? Enter it below and receive credit.</p>
       <input class="code" v-model="code" placeholder="a1b2" minlength="4" maxlength="4" autofocus required>
       <space />
-      <van-button type="primary" @click="withdraw" :disabled="!this.code" block round>Validate</van-button>
+      <van-button type="primary" :disabled="!this.code" @click="generateWithdrawal" block round>Validate</van-button>
     </block>
+
+    <van-popup v-model="completed">
+      <van-icon name="checked" />
+      <p>You were credited of {amount}!</p>
+    </van-popup>
   </div>
 </template>
 
@@ -16,12 +20,17 @@
     data() {
       return {
         code: "",
+        amount: 0,
+        completed: false,
+        transaction: null,
       }
     },
 
     methods: {
-      withdraw() {
-        debugger
+      generateWithdrawal() {
+        this.$store.commit('withdraw', this.code)
+        this.transaction = this.$store.state.getTransaction(this.code)
+        this.completed = true
       }
     }
   }

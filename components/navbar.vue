@@ -1,8 +1,6 @@
 <template>
   <van-nav-bar
       :title="title"
-      :right-text="nextLabel"
-      @click-right="nextCallback"
     >
     </van-nav-bar>
 </template>
@@ -11,14 +9,6 @@
   export default {
     props: {
       title: String,
-      nextFunction: Function,
-      nextLabel: String
     },
-    methods: {
-      nextCallback() {
-        this.nextFunction && this.nextFunction()
-      }
-
-    }
   }
 </script>

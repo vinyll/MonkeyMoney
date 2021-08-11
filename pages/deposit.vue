@@ -8,7 +8,6 @@
         <p>This amount will be removed from your remaining credit and added to your recipient once withdrawn.</p>
       </blockquote>
       <van-cell>
-        <!-- Use the title slot to customize the title -->
         <template #title>
           <input type="number" min=1 max=1000 v-model="amount" placeholder="60" autofocus required>
         </template>
@@ -16,7 +15,7 @@
       <van-button type="primary" :disabled="amount <= 0" round @click="generateDeposit" block>Transfer ></van-button>
     </block>
 
-    <van-popup v-model="transfering" position="bottom" :style="{ height: '268px' }" round>
+    <van-popup v-model="transaction" position="bottom" :style="{ height: '268px' }" round>
       <navbar :title="'Send ' + amount + ' credits'" />
       <block>
         <p class="code">{{code}}</p>
@@ -31,30 +30,34 @@
   export default {
     layout: "default",
     methods: {
-      generateDeposit() {
-        this.transfering = true
-        this.$store.commit('deposit', this.amount)
-        this.code = this.transaction.uid
+      async generateDeposit() {
+        try {
+          this.transaction = await this.$axios.$post('/api/deposit', { amount: this.amount }, {
+            headers: { 'Auth': this.$store.state.user.uid }
+          })
+        }
+        catch(error) {
+          console.error(error)
+          Notify('danger', String(error))
+        }
       },
 
       cancel() {
-        this.code = ""
-        this.transfering = false
+        this.amount = null
+        this.transaction = null
       }
     },
+
     data() {
       return {
-        transfering: false,
         amount: null,
+        transaction: null,
       }
     },
+
     computed: {
-      transaction() {
-        const transactions = this.$store.state.transactions
-        return transactions.length && transactions.slice(-1)[0]
-      },
       code() {
-        if(this.transaction) return this.transaction.uid.split('-')[1]
+        return this.transaction && this.transaction.uid.split('-')[1]
       }
     }
   }

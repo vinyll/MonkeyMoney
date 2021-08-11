@@ -1,3 +1,7 @@
+import { AxiosInstance } from 'axios'
+import { VueRouter } from 'vue-router/types/router'
+
+
 interface User {
   uid: string
   email: string
@@ -7,21 +11,36 @@ interface User {
 interface Transaction {
   from?: string
   to?: string
+  code: string
   amount: number
+  uid: string
 }
 
 interface State {
-  transactions: [Transaction?]
+  transactions: [Transaction]
   user?: User
 }
+
+interface NuxtInstance {
+  $router: VueRouter
+  $axios: AxiosInstance
+}
+
+
+declare const $nuxt: NuxtInstance
+declare const Notify: Function
 
 const storedUser = localStorage.getItem('user')
 const user = storedUser && JSON.parse(storedUser)
 
+
 export function state(): State {
   return {
     transactions: [],
-    user
+    user,
+    getTransaction(code) {
+      return this.transactions.find(t => t.uid.split('-')[1] === code)
+    },
   }
 }
 
@@ -38,19 +57,19 @@ export const mutations = {
     $nuxt.$router.go('/')
   },
 
-  transaction_add(state: State, transaction) {
+  transaction_add(state: State, transaction: Transaction) {
     state.transactions.push(transaction)
   },
 
-  deposit(state:State, amount: Number) {
-    $nuxt.$axios.post('/api/deposit', { amount }, {
+  withdraw(state:State, code: String) {
+    $nuxt.$axios.post('/api/withdraw', { code }, {
       headers: { 'Auth': state.user.uid }
     })
-      .then((response) => {
-        this.commit('transaction_add', response.data)
-      })
-      .catch((error) => {
-        Notify({ type: 'danger', message: error.response.data, duration: 5000 })
-      })
+      // .then((response: any) => {
+      //   this.commit('transaction_add', response.data)
+      // })
+      // .catch((error) => {
+      //   Notify({ type: 'danger', message: error.response.data, duration: 5000 })
+      // })
   }
 }

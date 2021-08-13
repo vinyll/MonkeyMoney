@@ -8,7 +8,7 @@
       <van-button type="primary" :disabled="!this.code" @click="generateWithdrawal" block round>Validate</van-button>
     </block>
 
-    <van-popup v-model="completed">
+    <van-popup v-model="transaction">
       <van-icon name="checked" />
       <p>You were credited of {amount}!</p>
     </van-popup>
@@ -21,16 +21,21 @@
       return {
         code: "",
         amount: 0,
-        completed: false,
         transaction: null,
       }
     },
 
     methods: {
-      generateWithdrawal() {
-        this.$store.commit('withdraw', this.code)
-        this.transaction = this.$store.state.getTransaction(this.code)
-        this.completed = true
+      async generateWithdrawal() {
+        try {
+          this.transaction = await this.$axios.$post('/api/withdraw', { code: this.code }, {
+            headers: { 'Auth': this.$store.state.user.uid }
+          })
+        } catch(error) {
+          console.error(error)
+          debugger
+          Notify('danger', String(error))
+        }
       }
     }
   }

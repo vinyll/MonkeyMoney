@@ -60,16 +60,4 @@ export const mutations = {
   transaction_add(state: State, transaction: Transaction) {
     state.transactions.push(transaction)
   },
-
-  withdraw(state:State, code: String) {
-    $nuxt.$axios.post('/api/withdraw', { code }, {
-      headers: { 'Auth': state.user.uid }
-    })
-      // .then((response: any) => {
-      //   this.commit('transaction_add', response.data)
-      // })
-      // .catch((error) => {
-      //   Notify({ type: 'danger', message: error.response.data, duration: 5000 })
-      // })
-  }
 }

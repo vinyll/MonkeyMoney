@@ -27,6 +27,8 @@
 </template>
 
 <script>
+  import { Notify } from 'vant'
+
   export default {
     layout: "default",
     methods: {
@@ -38,7 +40,7 @@
         }
         catch(error) {
           console.error(error)
-          Notify('danger', String(error))
+          Notify({ type: 'danger', message: error.response.data, duration: 5000 })
         }
       },
 

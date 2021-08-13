@@ -45,6 +45,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    'nuxt-client-init-module',
   ],
 
   proxy: {

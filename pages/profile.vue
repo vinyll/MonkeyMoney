@@ -5,13 +5,13 @@
       <content-title>User info</content-title>
       <van-cell-group>
         <van-cell title="Email" :value="user.email" />
-        <van-cell title="Password" value="" />
+        <van-cell title="Password" value="********" />
         <van-cell title="Remaining credit" :value="user.credit" />
       </van-cell-group>
 
       <content-title>History</content-title>
-      <van-cell-group>
-        <van-cell title="12/08/2021" :value="user.credit" />
+      <van-cell-group v-for="transaction in user.transactions">
+        <van-cell :title="formatDate(transaction.edge.datetime)" :value="`${(transaction.type === 'withdrawal') ? '-' : '+'}${transaction.edge.amount}`" />
       </van-cell-group>
     </block>
 
@@ -22,7 +22,16 @@
   export default {
     computed: {
       user() {
-        return this.$store.state.user
+        console.debug(this.$store.state.user.uid)
+        console.debug(this.$store.state.user.transactions.map(t => t.origin.uid))
+        return this.$store.state.user || {}
+      },
+    },
+
+    methods: {
+      formatDate(timestamp) {
+        const date = new Date(timestamp * 1000)
+        return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`
       }
     }
   }

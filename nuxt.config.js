@@ -49,7 +49,10 @@ export default {
   ],
 
   proxy: {
-    '/api': { target: 'http://localhost:3579', pathRewrite: {'^/api': ''} }
+    '/api': {
+      target: process.env.NODE_ENV !== 'production' ? 'http://localhost:3579' : 'https://api.monkeymoney.connect.cafe',
+      pathRewrite: {'^/api': ''}
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

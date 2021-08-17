@@ -3,7 +3,7 @@ Description=MonkeyMoney App
 After=network.target
 
 [Service]
-ExecStart=yarn dev -p 12001
+ExecStart=nvm use latest && npm run dev --port 12001
 WorkingDirectory=/home/ubuntu/monkeymoney/client
 Restart=always
 RestartSec=3

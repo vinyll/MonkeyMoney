@@ -31,14 +31,16 @@ interface NuxtInstance {
 declare const $nuxt: NuxtInstance
 declare const Notify: Function
 
+const defaultUser = {
+  uid: "",
+  email: "",
+  credit: 0,
+}
+
 export function state(): State {
   return {
     transactions: [],
-    user: {
-      uid: "",
-      email: "",
-      credit: 0,
-    },
+    user: defaultUser,
   }
 }
 
@@ -47,11 +49,11 @@ export const actions = {
     await context.store.dispatch('loadUser')
   },
 
-  async loadUser({ commit }, context) {
+  async loadUser({ commit }: { commit: any }, context: any) {
     try {
       const uid = JSON.parse(localStorage.getItem('user', {})).uid
-      if(!uid) return this.$router.push('/')
-      const user = await this.$axios.$get('/api/me', {
+      if(!uid) return $nuxt.$router.push('/')
+      const user = await $nuxt.$axios.$get('/api/me', {
         headers: { 'Auth': uid }
       })
       if(!user['uid']) throw new Error("Could not load user data")
@@ -61,11 +63,11 @@ export const actions = {
     }
   },
 
-  deposit({ commit }, context) {
+  deposit(context: any) {
     context.store.dispatch('loadUser')
   },
 
-  withdraw({ commit }, context) {
+  withdraw(context: any) {
     context.store.dispatch('loadUser')
   },
 }
@@ -74,12 +76,12 @@ export const mutations = {
   login(state: State, user: User) {
     localStorage.setItem('user', JSON.stringify(user))
     state.user = user
-    this.$router.push('/')
+    $nuxt.$router.push('/')
   },
 
   logout(state: State) {
     localStorage.removeItem('user')
-    state.user = {}
+    state.user = defaultUser
     $nuxt.$router.push('/')
   },
 }

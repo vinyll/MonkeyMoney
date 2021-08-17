@@ -16,7 +16,8 @@
 
     computed: {
       user() {
-        return this.$store.state.user
+        const user = this.$store.state.user
+        return user.uid && user
       }
     },
   }

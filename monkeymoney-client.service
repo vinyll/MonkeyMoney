@@ -1,0 +1,18 @@
+[Unit]
+Description=MonkeyMoney App
+After=network.target
+
+[Service]
+ExecStart=yarn dev
+WorkingDirectory=/home/ubuntu/monkeymoney/client
+Restart=always
+RestartSec=3
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=monkeymoney-app
+#User=<alternate user>
+#Group=<alternate group>
+Environment=""
+
+[Install]
+WantedBy=multi-user.target

@@ -3,7 +3,7 @@ Description=MonkeyMoney App
 After=network.target
 
 [Service]
-ExecStart=export YARN_BIN=/home/ubuntu/.nvm/versions/node/v16.6.2/bin/yarn && $YARN_BIN generate && $YARN_BIN start -p 12001
+ExecStart=. /home/ubuntu/.bashrc && yarn generate && yarn start -p 12001
 WorkingDirectory=/home/ubuntu/monkeymoney/client
 Restart=always
 RestartSec=3

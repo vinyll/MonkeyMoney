@@ -1,5 +1,5 @@
 deploy:
-	ssh monkeymoney.connect.cafe '\
+	ssh monkeymoney '\
 		cd ~/monkeymoney/client && \
 		git pull && \
 		sudo systemctl daemon-reload && \

@@ -38,8 +38,6 @@
 </template>
 
 <script>
-  import { Notify } from 'vant'
-
   export default {
     computed: {
       user() {
@@ -58,12 +56,10 @@
       onSubmit() {
         const data = { email: this.email, password: this.password }
 
-        this.$axios.post('/api/login', data)
-        .then((response) => {
-          this.$store.commit('login', response.data)
-        })
-        .catch((error) => {
-          Notify({ type: 'danger', message: error.response.data, duration: 5000 })
+        this.$api('/login', { method: 'post', json: data })
+        .then(response => {
+          if(!response.ok) return
+          this.$store.commit('login', response.json)
         })
       }
     },

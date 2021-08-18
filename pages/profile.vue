@@ -22,8 +22,6 @@
   export default {
     computed: {
       user() {
-        console.debug(this.$store.state.user.uid)
-        console.debug(this.$store.state.user.transactions.map(t => t.origin.uid))
         return this.$store.state.user || {}
       },
     },

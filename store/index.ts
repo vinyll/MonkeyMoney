@@ -6,7 +6,7 @@ interface User {
   uid: string
   email: string
   credit: number
-  groups?: [string]
+  groups?: [string],
 }
 
 interface Transaction {

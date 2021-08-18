@@ -24,7 +24,7 @@ interface State {
 
 interface NuxtInstance {
   $router: VueRouter
-  $axios: AxiosInstance
+  $axios: any
 }
 
 
@@ -51,7 +51,7 @@ export const actions = {
 
   async loadUser({ commit }: { commit: any }, context: any) {
     try {
-      const uid = JSON.parse(localStorage.getItem('user', {})).uid
+      const uid = JSON.parse(localStorage.getItem('user') || '{}').uid
       if(!uid) return $nuxt.$router.push('/')
       const user = await $nuxt.$axios.$get('/api/me', {
         headers: { 'Auth': uid }

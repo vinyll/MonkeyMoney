@@ -48,9 +48,13 @@ export default {
     'nuxt-client-init-module',
   ],
 
+  axios: {
+    baseURL:"https://monkeymoney.connect.cafe/"
+  },
+
   proxy: {
     '/api': {
-      target: process.env.NODE_ENV !== 'production' ? 'http://localhost:3579' : 'https://api.monkeymoney.connect.cafe',
+      target: 'https://api.monkeymoney.connect.cafe',
       pathRewrite: {'^/api': ''}
     }
   },

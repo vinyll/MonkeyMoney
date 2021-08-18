@@ -3,7 +3,8 @@ Description=MonkeyMoney App
 After=network.target
 
 [Service]
-ExecStart=/home/ubuntu/.nvm/versions/node/v16.6.2/bin/yarn generate && /home/ubuntu/.nvm/versions/node/v16.6.2/bin/yarn start -p 12001
+ExecStartPre=/home/ubuntu/.nvm/versions/node/v16.6.2/bin/yarn generate
+ExecStart=/home/ubuntu/.nvm/versions/node/v16.6.2/bin/yarn start -p 12001
 WorkingDirectory=/home/ubuntu/monkeymoney/client
 Restart=always
 RestartSec=3

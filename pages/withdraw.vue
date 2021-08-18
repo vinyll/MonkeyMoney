@@ -30,19 +30,14 @@
 
     methods: {
       async generateWithdrawal() {
-        this.$axios.post('/api/withdraw', { code: this.code }, {
-          headers: { 'Auth': this.$store.state.user.uid }
-        })
-        .then(response => {
-          if(!response.ok) return Notify({ type: 'danger', message: response.content, duration: 5000 })
-          return response.json()
-        })
+        const data = { email: this.email, password: this.password }
+
+        this.$api('/login', { method: 'post', json: data })
         .then(transaction => {
+          debugger
+          if(!response.ok) return
           this.amount = transaction['edge']['amount']
           $nuxt.$store.dispatch('withdraw')
-        })
-        .catch(error => {
-          Notify({ type: 'danger', message: error, duration: 5000 })
         })
       }
     }

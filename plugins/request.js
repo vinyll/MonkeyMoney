@@ -35,7 +35,7 @@ function notify(message) {
 function api (uri, options = { json: null }) {
   let response
 
-  return fetch('http://localhost:3579/login', {
+  return fetch(`http://localhost:3579${uri}`, {
           method: 'post',
           body: JSON.stringify(options.json)
         })
@@ -44,9 +44,11 @@ function api (uri, options = { json: null }) {
         })
         .then(r => {
           response = r
+          debugger
           return r.text()
         })
         .then(content => {
+          debugger
           try {
             response.json = JSON.parse(content)
           }

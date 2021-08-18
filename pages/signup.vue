@@ -52,15 +52,12 @@
 
     methods: {
       onSubmit() {
-        this.$axios.post('/api/signup', {
-          email: this.email,
-          password: this.password,
-        })
-        .then((response) => {
-          this.$store.commit('login', response.data)
-        })
-        .catch((error) => {
-          Notify({ type: 'danger', message: error.response.data, duration: 5000 })
+        const data = { email: this.email, password: this.password }
+
+        this.$api('/signup', { method: 'post', json: data })
+        .then(response => {
+          if(!response.ok) return
+          this.$store.commit('login', response.json)
         })
       }
     },

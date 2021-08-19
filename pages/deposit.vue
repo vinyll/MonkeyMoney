@@ -32,17 +32,16 @@
   export default {
     layout: "default",
     methods: {
-      async generateDeposit() {
-        try {
-          this.transaction = await this.$axios.$post('/api/deposit', { amount: this.amount }, {
-            headers: { 'Auth': this.$store.state.user.uid }
-          })
-          $nuxt.$store.dispatch('deposit', { amount: this.amount })
-        }
-        catch(error) {
-          console.error(error)
-          Notify({ type: 'danger', message: error.response.data, duration: 5000 })
-        }
+      generateDeposit() {
+        const data = { amount: this.amount }
+        this.$api('/deposit', { method: 'post', json: data, headers: {
+          Auth: this.$store.state.user.uid,
+        }})
+        .then(response => {
+          if(!response.ok) return
+          this.transaction = response.json
+          this.$store.dispatch('deposit', { amount: this.amount })
+        })
       },
 
       cancel() {

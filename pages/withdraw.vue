@@ -34,7 +34,6 @@
 
         this.$api('/login', { method: 'post', json: data })
         .then(transaction => {
-          debugger
           if(!response.ok) return
           this.amount = transaction['edge']['amount']
           $nuxt.$store.dispatch('withdraw')

@@ -32,32 +32,8 @@ function notify(message) {
   return Notify({ type: 'danger', message, duration: 5000 })
 }
 
-function api (uri, options = { json: null }) {
-  let response
-
-  return fetch(`http://localhost:3579${uri}`, {
-          method: 'post',
-          body: JSON.stringify(options.json)
-        })
-        .catch((error) => {
-          notify(error)
-        })
-        .then(r => {
-          response = r
-          debugger
-          return r.text()
-        })
-        .then(content => {
-          debugger
-          try {
-            response.json = JSON.parse(content)
-          }
-          catch {
-            response.text = content
-            notify(response.text)
-          }
-          return response
-        })
+function api (uri, options = { json: null, headers: {} }) {
+  return request(`http://localhost:3579${uri}`, options)
 }
 
 export default (context, inject) => {

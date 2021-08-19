@@ -11,7 +11,7 @@
 
       <content-title>History</content-title>
       <van-cell-group v-for="transaction in user.transactions">
-        <van-cell :title="formatDate(transaction.edge.datetime)" :value="`${(transaction.type === 'withdrawal') ? '-' : '+'}${transaction.edge.amount}`" />
+        <van-cell :title="formatDate(transaction.edge.datetime)" :value="`${(transaction.type === 'withdrawal') ? '+' : '-'}${transaction.edge.amount}`" />
       </van-cell-group>
     </block>
 

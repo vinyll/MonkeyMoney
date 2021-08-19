@@ -8,7 +8,7 @@
       <van-button type="primary" :disabled="!this.code" @click="generateWithdrawal" block round>Validate</van-button>
     </block>
 
-    <van-popup>
+    <van-popup v-model="amount" position="bottom" :style="{ height: '268px' }" round>
       <div class="popup">
         <van-icon name="checked" />
         <p>You were credited of {{amount}}</p>
@@ -30,13 +30,16 @@
 
     methods: {
       async generateWithdrawal() {
-        const data = { email: this.email, password: this.password }
+        const data = { code: this.code }
 
-        this.$api('/login', { method: 'post', json: data })
-        .then(transaction => {
+        this.$api('/withdraw', { method: 'post', json: data, headers: {
+          Auth: this.$store.state.user.uid
+        } })
+        .then(response => {
           if(!response.ok) return
+          const transaction = response.json
           this.amount = transaction['edge']['amount']
-          $nuxt.$store.dispatch('withdraw')
+          this.$store.dispatch('withdraw')
         })
       }
     }
@@ -60,5 +63,13 @@
   .popup {
     padding: 2rem;
     font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .van-icon {
+    font-size: 90px;
+    display: flex;
+    justify-content: center;
+    color: rgb(31, 155, 35);
   }
 </style>

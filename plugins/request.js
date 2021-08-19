@@ -8,7 +8,7 @@ function request (url, options = { headers: {}, method: 'get', json: null, body:
     if(!Object.keys(options.headers).includes('Content-Type')) options.headers["Content-Type"] = 'application/json'
   }
   if(options.method) options.method = options.method.toUpperCase()
-  let response = null
+  let response
 
   return fetch(url, options)
     .then((r) => {
@@ -33,7 +33,22 @@ function notify(message) {
 }
 
 function api (uri, options = { json: null, headers: {} }) {
-  return request(`https://api.monkeymoney.connect.cafe${uri}`, options)
+  // const domain = 'https://api.monkeymoney.connect.cafe'
+  const domain = 'http://localhost:3579'
+  return request(`${domain}${uri}`, options)
+  .then((response) => {
+    if(!response.ok) {
+      notify(response.json)
+      if(response.status === 401) {
+        $nuxt.$store.commit('logout')
+      }
+    }
+    return response
+  })
+  .catch((error) => {
+    console.error(error)
+    notify(error)
+  })
 }
 
 export default (context, inject) => {

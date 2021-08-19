@@ -44,44 +44,45 @@ export function state(): State {
   }
 }
 
-export const actions = {
-  async nuxtClientInit({ commit }: { commit: any }, context: any) {
-    await context.store.dispatch('loadUser')
+export const actions: any = {
+  async nuxtClientInit(context: any) {
+    context.dispatch('loadUser')
   },
 
-  async loadUser({ commit }: { commit: any }, context: any) {
-    try {
-      const uid = JSON.parse(localStorage.getItem('user') || '{}').uid
-      if(!uid) return $nuxt.$router.push('/')
-      const user = await $nuxt.$axios.$get('/api/me', {
+  loadUser({ commit }: { commit: any }) {
+    const uid = JSON.parse(localStorage.getItem('user') || '{}').uid
+    let user = { uid: null }
+    if(uid) {
+      const response = this.$api('/me', {
         headers: { 'Auth': uid }
+      }).then((response: any) => {
+        user = response.json
+        user.uid ? commit('login', user) : commit('logout')
       })
-      if(!user['uid']) throw new Error("Could not load user data")
-      commit('login', user)
-    } catch(error) {
-      console.error(error)
     }
   },
 
   deposit(context: any) {
-    context.store.dispatch('loadUser')
+    context.dispatch('loadUser')
   },
 
   withdraw(context: any) {
-    context.store.dispatch('loadUser')
+    context.dispatch('loadUser')
   },
 }
 
-export const mutations = {
+export const mutations: any = {
   login(state: State, user: User) {
     localStorage.setItem('user', JSON.stringify(user))
     state.user = user
-    $nuxt.$router.push('/')
   },
 
   logout(state: State) {
     localStorage.removeItem('user')
     state.user = defaultUser
-    $nuxt.$router.push('/')
+    if(this.$router.currentRoute.path !== '/') {
+      this.$router.push('/')
+      location.href = '/'
+    }
   },
 }

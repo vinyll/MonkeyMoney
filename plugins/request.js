@@ -33,7 +33,7 @@ function notify(message) {
 }
 
 function api (uri, options = { json: null, headers: {} }) {
-  return request(`http://localhost:3579${uri}`, options)
+  return request(`https://api.monkeymoney.connect.cafe${uri}`, options)
 }
 
 export default (context, inject) => {

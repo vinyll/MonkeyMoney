@@ -55,6 +55,7 @@ export default {
     'nuxt-client-init-module',
   ],
 
+  // @TODO: try to use axios again, currently request/$api are used.
   axios: {
     baseURL: env === 'production' ? 'https://monkeymoney.connect.cafe' : 'http://localhost:3579',
   },

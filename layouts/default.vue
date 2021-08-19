@@ -3,15 +3,16 @@
     <main>
       <nuxt />
     </main>
-    <tabbar v-show="this.user" />
+    <tabbar v-show="authenticated" />
   </div>
 </template>
 
 <script>
   export default {
     computed: {
-      user() {
-        return this.$store.state.user
+      authenticated() {
+        const user = this.$store.state.user
+        return user && user.uid
       }
     }
   }

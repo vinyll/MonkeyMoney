@@ -8,7 +8,8 @@
       <van-button type="primary" :disabled="!this.code" @click="generateWithdrawal" block round>Validate</van-button>
     </block>
 
-    <van-popup v-model="amount" position="bottom" :style="{ height: '268px' }" round>
+
+    <van-popup v-model="confirmed" position="bottom" :style="{ height: '268px' }" round>
       <div class="popup">
         <van-icon name="checked" />
         <p>You were credited of {{amount}}</p>
@@ -19,10 +20,13 @@
 
 <script>
   import { Notify } from 'vant'
+  import { Dialog } from 'vant'
+
 
   export default {
     data() {
       return {
+        confirmed: false,
         code: "",
         amount: null,
       }
@@ -32,9 +36,25 @@
       async generateWithdrawal() {
         const data = { code: this.code }
 
-        this.$api('/withdraw', { method: 'post', json: data, headers: {
+        this.$api(`/transaction/${this.code}`, { headers: {
           Auth: this.$store.state.user.uid
         } })
+        .then((response) => {
+          const transaction = response.json
+          this.amount = transaction['edge']['amount']
+          return Dialog.confirm({
+            title: 'Check transaction',
+            message: `Receive ${this.amount}?`,
+          })
+        })
+        // Confirm
+        .then(() => {
+          this.confirmed = true
+          this.code = ""
+          return this.$api('/withdraw', { method: 'post', json: data, headers: {
+            Auth: this.$store.state.user.uid
+          } })
+        })
         .then(response => {
           if(!response.ok) return
           const transaction = response.json

@@ -23,4 +23,12 @@
     background: #f6f6f6;
     color: #888;
   }
+  .page-enter-active,
+  .page-leave-active {
+    transition: opacity 0.1s;
+  }
+  .page-enter,
+  .page-leave-to {
+    opacity: 0;
+  }
 </style>

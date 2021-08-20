@@ -3,11 +3,11 @@ import { VueRouter } from 'vue-router/types/router'
 
 import { Locale } from 'vant'
 
+// import enUS from 'vant/es/locale/lang/en-US'
+// Locale.use('en-US', enUS)
+
 // import frFR from 'vant/es/locale/lang/fr-FR'
 // Locale.use('fr-FR', frFR)
-
-import enUS from 'vant/es/locale/lang/en-US'
-Locale.use('en-US', enUS)
 
 interface User {
   uid: string

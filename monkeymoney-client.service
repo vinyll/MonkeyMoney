@@ -11,8 +11,8 @@ RestartSec=3
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=monkeymoney-app
-#User=<alternate user>
-#Group=<alternate group>
+User=ubuntu
+Group=ubuntu
 Environment=""
 
 [Install]

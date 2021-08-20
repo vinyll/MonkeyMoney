@@ -58,6 +58,7 @@
         .then(response => {
           if(!response.ok) return
           this.$store.commit('login', response.json)
+          this.$router.push('/')
         })
       }
     },

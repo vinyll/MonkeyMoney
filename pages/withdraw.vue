@@ -1,8 +1,8 @@
 <template>
   <div>
-    <navbar title="Receive credit" />
+    <navbar :title="`Receive ${$config.currency.name}`" />
     <block>
-      <p>Do you have a code? Enter it below and receive credit.</p>
+      <p>Do you have a code? Enter it below and receive ${$config.currency.name}.</p>
       <input class="code" v-model="code" placeholder="a1b2" minlength="4" maxlength="4" autofocus required>
       <space />
       <van-button type="primary" :disabled="!this.code" @click="generateWithdrawal" block round>Validate</van-button>
@@ -12,7 +12,7 @@
     <van-popup v-model="confirmed" position="bottom" :style="{ height: '268px' }" round>
       <div class="popup">
         <van-icon name="checked" />
-        <p>You were credited of {{amount}}</p>
+        <p>You were credited of {{amount}}{{$config.currency.symbol}}</p>
       </div>
     </van-popup>
   </div>
@@ -44,7 +44,7 @@
           this.amount = transaction['edge']['amount']
           return Dialog.confirm({
             title: 'Check transaction',
-            message: `Receive ${this.amount}?`,
+            message: `You are receiving ${this.amount}${this.$config.currency.symbol}`,
           })
         })
         // Confirm

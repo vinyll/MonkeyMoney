@@ -6,7 +6,7 @@
       <van-cell-group>
         <van-cell title="Email" :value="user.email" />
         <van-cell title="Password" value="********" />
-        <van-cell title="Remaining credit" :value="user.credit" />
+        <van-cell title="Remaining credit" :value="`${user.credit}${$config.currency.symbol}`" />
       </van-cell-group>
 
       <content-title>History</content-title>

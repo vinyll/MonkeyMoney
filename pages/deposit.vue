@@ -1,25 +1,25 @@
 <template>
   <div>
-    <navbar title="Send credit" />
+    <navbar :title="`Send ${$config.currency.name}`" />
 
     <block>
       <blockquote>
-        <p>Enter an amount to transfer.</p>
-        <p>This amount will be removed from your remaining credit and added to your recipient once withdrawn.</p>
+        <p>Enter the amount of {{$config.currency.symbol}} to send.</p>
+        <p>This amount will be removed from your remaining credit and made available to your recipient.</p>
       </blockquote>
       <van-cell>
         <template #title>
-          <input type="number" min=1 max=1000 v-model="amount" placeholder="60" autofocus required>
+          <input type="number" min=1 max=1000 v-model="amount" :placeholder="`60${$config.currency.symbol}`" autofocus required>
         </template>
       </van-cell>
       <van-button type="primary" :disabled="amount <= 0" round @click="generateDeposit" block>Transfer ></van-button>
     </block>
 
     <van-popup v-model="transaction" position="bottom" :style="{ height: '268px' }" round>
-      <navbar :title="'Send ' + amount + ' credits'" />
+      <navbar :title="`Send ${amount}${$config.currency.symbol}`" />
       <block>
         <p class="code">{{code}}</p>
-        <small>Giving this code will allow someone to take out this credit from your account.</small>
+        <small>Giving this code will allow someone to take out this amount of {{$config.currency.name}} from your account.</small>
         <van-button type="danger" @click="cancel" block round>Cancel</van-button>
       </block>
     </van-popup>
@@ -47,7 +47,7 @@
       cancel() {
         this.amount = null
         this.transaction = null
-      }
+      },
     },
 
     data() {
@@ -72,7 +72,8 @@
     width: 100%;
   }
   input::placeholder {
-    color: #eee;
+    color: #ccc;
+    filter: opacity(.3);
   }
 
   .code {

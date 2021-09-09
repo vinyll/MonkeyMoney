@@ -33,8 +33,8 @@ function notify(message) {
 }
 
 function api (uri, options = { json: null, headers: {} }) {
-  // const domain = 'https://api.monkeymoney.connect.cafe'
-  const domain = 'http://localhost:3579'
+  const domain = 'https://api.monkeymoney.connect.cafe'
+  // const domain = 'http://localhost:3579'
   return request(`${domain}${uri}`, options)
   .then((response) => {
     if(!response.ok) {

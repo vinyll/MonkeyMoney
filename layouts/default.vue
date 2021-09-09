@@ -19,9 +19,18 @@
 </script>
 
 <style>
+  html, body {
+    min-height: 100vh;
+    margin: 0;
+  }
+  html {
+    background: #eee;
+  }
   body {
     background: #f6f6f6;
     color: #888;
+    max-width: 600px;
+    margin: 0 auto;
   }
   .page-enter-active,
   .page-leave-active {

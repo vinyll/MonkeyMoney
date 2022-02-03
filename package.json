@@ -9,16 +9,16 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.13.6",
-    "@nuxtjs/proxy": "^2.1.0",
-    "core-js": "^3.15.1",
-    "nuxt": "^2.15.7",
-    "nuxt-client-init-module": "^0.3.0",
-    "vant": "^2.12.22"
+    "@nuxtjs/axios": "*",
+    "@nuxtjs/proxy": "*",
+    "core-js": "*",
+    "nuxt": "*",
+    "nuxt-client-init-module": "*",
+    "vant": "*"
   },
   "devDependencies": {
-    "@nuxt/types": "^2.15.7",
-    "@nuxt/typescript-build": "^2.1.0",
-    "@nuxtjs/pwa": "^3.3.5"
+    "@nuxt/types": "*",
+    "@nuxt/typescript-build": "*",
+    "@nuxtjs/pwa": "*"
   }
 }

@@ -13,7 +13,7 @@ StandardError=syslog
 SyslogIdentifier=monkeymoney-app
 User=ubuntu
 Group=ubuntu
-Environment=""
+Environment="NODE_ENV=production"
 
 [Install]
 WantedBy=multi-user.target

@@ -20,5 +20,6 @@
     "@nuxt/types": "*",
     "@nuxt/typescript-build": "*",
     "@nuxtjs/pwa": "*"
-  }
+  },
+  "license": "GPL"
 }
